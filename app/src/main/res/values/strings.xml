@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Sport centers</string>
+    <string name="password">Šifra</string>
+    <string name="username">Korisničko ime</string>
+    <string name="login">Prijava</string>
+    <string name="register">Registruj se</string>
+    <string name="name">Ime</string>
+    <string name="lastname">Prezime</string>
+    <string name="repeat_password">Ponovite šifru</string>
+    <string name="city">Grad</string>
+</resources>
