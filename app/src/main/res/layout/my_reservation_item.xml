@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:id="@+id/SportCenterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:textColor="#000"
+        android:text="Line 1"
+        android:textStyle="bold"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"/>
+    <TextView
+        android:id="@+id/Price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/SportCenterName"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="Line 1"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/ReservationDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Price"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="Line 1"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/Period"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ReservationDate"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        android:text="Line 1"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/MyReservationId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <Button
+        android:id="@+id/btnPozovi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Pozovi"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorTextWhite"
+        android:layout_toRightOf="@id/SportCenterName"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentRight="true"
+        />
+
+    <Button
+        android:id="@+id/btnOtkazi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Otkazi"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorTextWhite"
+        android:layout_below="@id/btnPozovi"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentRight="true"
+        />
+
+    <Button
+        android:id="@+id/btnNavigacija"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Navigacija"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorTextWhite"
+        android:layout_below="@id/btnOtkazi"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>
