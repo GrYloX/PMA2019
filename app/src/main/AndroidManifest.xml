@@ -37,6 +37,12 @@
             </intent-filter>
             -->
         </activity>
+
+        <provider
+            android:name="ftn.proj.sportcenters.database.DBContentProvider"
+            android:authorities="ftn.proj.sportcenters" >
+        </provider>
+
     </application>
 
 </manifest>
