@@ -10,24 +10,48 @@ import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
+
 public class DBContentProvider extends ContentProvider {
 
     private SportCenterSQLiteHelper database;
 
     private static final int SPORT_CENTER = 10;
     private static final int SPORT_CENTER_ID = 20;
+    private static final int USER = 30;
+    private static final int USER_ID = 40;
+    private static final int SPORT = 50;
+    private static final int SPORT_ID = 60;
+    private static final int COMMENT = 70;
+    private static final int COMMENT_ID = 80;
 
     private static final String AUTHORITY = "ftn.proj.sportcenters";
 
     private static final String SPORT_CENTER_PATH = "sport_center";
+    private static final String USER_PATH = "user";
+    private static final String SPORT_PATH = "sport";
+    private static final String COMMENT_PATH = "comment";
 
     public static final Uri CONTENT_URI_SPORT_CENTER = Uri.parse("content://" + AUTHORITY + "/" + SPORT_CENTER_PATH);
+    public static final Uri CONTENT_URI_USER = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
+    public static final Uri CONTENT_URI_SPORT = Uri.parse("content://" + AUTHORITY + "/" + SPORT_PATH);
+    public static final Uri CONTENT_URI_COMMENT = Uri.parse("content://" + AUTHORITY + "/" + COMMENT_PATH);
 
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
         sURIMatcher.addURI(AUTHORITY, SPORT_CENTER_PATH, SPORT_CENTER);
         sURIMatcher.addURI(AUTHORITY, SPORT_CENTER_PATH + "/#", SPORT_CENTER_ID);
+        sURIMatcher.addURI(AUTHORITY, USER_PATH, USER);
+        sURIMatcher.addURI(AUTHORITY, USER_PATH + "/#", USER_ID);
+        sURIMatcher.addURI(AUTHORITY, SPORT_PATH, SPORT);
+        sURIMatcher.addURI(AUTHORITY, SPORT_PATH + "/#", SPORT_ID);
+        sURIMatcher.addURI(AUTHORITY, COMMENT_PATH, COMMENT);
+        sURIMatcher.addURI(AUTHORITY, COMMENT_PATH + "/#", COMMENT_ID);
     }
 
 
@@ -55,6 +79,33 @@ public class DBContentProvider extends ContentProvider {
             case SPORT_CENTER:
                 // Set the table
                 queryBuilder.setTables(SportCenterSQLiteHelper.TABLE_SPORT_CENTER);
+                break;
+            case USER_ID:
+                // Adding the ID to the original query
+                queryBuilder.appendWhere(SportCenterSQLiteHelper.COLUMN_ID + "="
+                        + uri.getLastPathSegment());
+                //$FALL-THROUGH$
+            case USER:
+                // Set the table
+                queryBuilder.setTables(SportCenterSQLiteHelper.TABLE_SPORT);
+                break;
+            case SPORT_ID:
+                // Adding the ID to the original query
+                queryBuilder.appendWhere(SportCenterSQLiteHelper.COLUMN_ID + "="
+                        + uri.getLastPathSegment());
+                //$FALL-THROUGH$
+            case SPORT:
+                // Set the table
+                queryBuilder.setTables(SportCenterSQLiteHelper.TABLE_SPORT);
+                break;
+            case COMMENT_ID:
+                // Adding the ID to the original query
+                queryBuilder.appendWhere(SportCenterSQLiteHelper.COLUMN_ID + "="
+                        + uri.getLastPathSegment());
+                //$FALL-THROUGH$
+            case COMMENT:
+                // Set the table
+                queryBuilder.setTables(SportCenterSQLiteHelper.TABLE_COMMENT);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -87,6 +138,18 @@ public class DBContentProvider extends ContentProvider {
                 id = sqlDB.insert(SportCenterSQLiteHelper.TABLE_SPORT_CENTER, null, values);
                 retVal = Uri.parse(SPORT_CENTER_PATH + "/" + id);
                 break;
+            case USER:
+                id = sqlDB.insert(SportCenterSQLiteHelper.TABLE_USER, null, values);
+                retVal = Uri.parse(USER_PATH + "/" + id);
+                break;
+            case SPORT:
+                id = sqlDB.insert(SportCenterSQLiteHelper.TABLE_SPORT, null, values);
+                retVal = Uri.parse(SPORT_PATH + "/" + id);
+                break;
+            case COMMENT:
+                id = sqlDB.insert(SportCenterSQLiteHelper.TABLE_COMMENT, null, values);
+                retVal = Uri.parse(COMMENT_PATH + "/" + id);
+                break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
@@ -115,6 +178,63 @@ public class DBContentProvider extends ContentProvider {
                 } else {
                     rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_SPORT_CENTER,
                             SportCenterSQLiteHelper.COLUMN_ID + "=" + idSportCenter
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case USER:
+                rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_USER,
+                        selection,
+                        selectionArgs);
+                break;
+            case USER_ID:
+                String idUser = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_USER,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idUser,
+                            null);
+                } else {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_USER,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idUser
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case SPORT:
+                rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_SPORT,
+                        selection,
+                        selectionArgs);
+                break;
+            case SPORT_ID:
+                String idSport = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_SPORT,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idSport,
+                            null);
+                } else {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_SPORT,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idSport
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case COMMENT:
+                rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_COMMENT,
+                        selection,
+                        selectionArgs);
+                break;
+            case COMMENT_ID:
+                String idComment = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_COMMENT,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idComment,
+                            null);
+                } else {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_COMMENT,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idComment
                                     + " and "
                                     + selection,
                             selectionArgs);
@@ -156,10 +276,77 @@ public class DBContentProvider extends ContentProvider {
                             selectionArgs);
                 }
                 break;
+            case USER:
+                rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_USER,
+                        values,
+                        selection,
+                        selectionArgs);
+                break;
+            case USER_ID:
+                String idUser = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_USER,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idUser,
+                            null);
+                } else {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_USER,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idUser
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case SPORT:
+                rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_SPORT,
+                        values,
+                        selection,
+                        selectionArgs);
+                break;
+            case SPORT_ID:
+                String idSport = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_SPORT,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idSport,
+                            null);
+                } else {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_SPORT,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idSport
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case COMMENT:
+                rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_COMMENT,
+                        values,
+                        selection,
+                        selectionArgs);
+                break;
+            case COMMENT_ID:
+                String idComment = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_COMMENT,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idComment,
+                            null);
+                } else {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_COMMENT,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idComment
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri, null);
         return rowsUpdated;
     }
+
 }

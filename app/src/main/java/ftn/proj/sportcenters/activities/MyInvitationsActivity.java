@@ -35,7 +35,7 @@ public class MyInvitationsActivity extends AppCompatActivity {
                 1,
                 new Reservation(
                         1,
-                        new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>()),
+                        new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(), new ArrayList<String>()),
                         "Tennis",
                         1000.0,
                         new Date(),
@@ -46,7 +46,7 @@ public class MyInvitationsActivity extends AppCompatActivity {
                 1,
                 new Reservation(
                         1,
-                        new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>()),
+                        new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(), new ArrayList<String>()),
                         "Tennis",
                         1000.0,
                         new Date(),

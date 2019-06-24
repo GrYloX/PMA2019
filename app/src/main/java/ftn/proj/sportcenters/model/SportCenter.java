@@ -13,14 +13,16 @@ public class SportCenter implements Serializable {
     private String address;
     private int image;
     private List<String> workingHours;
+    private List<String> sports;
 //    private static Creator CREATOR;
 
-    public SportCenter(int id, String name, String address, int image, List<String> workingHours) {
+    public SportCenter(int id, String name, String address, int image, List<String> workingHours, List<String> sports) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.image = image;
         this.workingHours = workingHours;
+        this.sports = sports;
     }
 
     public SportCenter(){
@@ -72,6 +74,14 @@ public class SportCenter implements Serializable {
 
     public void setWorkingHours(List<String> workingHours) {
         this.workingHours = workingHours;
+    }
+
+    public List<String> getSports() {
+        return sports;
+    }
+
+    public void setSports(List<String> sports) {
+        this.sports = sports;
     }
 
     @Override

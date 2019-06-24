@@ -35,14 +35,14 @@ public class MyReservationsActivity extends AppCompatActivity {
     private void loadItems(ArrayList<Reservation> myReservations) {
         myReservations.add(new Reservation(
                 1,
-                new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>()),
+                new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(), new ArrayList<String>()),
                 "Tennis",
                 1000.0,
                 new Date(),
                 "20:00-21:00"));
         myReservations.add(new Reservation(
                 1,
-                new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>()),
+                new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(),new ArrayList<String>()),
                 "Basketball",
                 1500.0,
                 new Date(),
