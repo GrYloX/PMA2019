@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.CommentActivity">
+
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="26sp"
+        android:gravity="center"
+        android:textColor="@color/colorTextGrey"
+        android:text="Line 1"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:textColor="@color/colorTextGrey"
+        android:text="Komentari:"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/Name"
+        android:layout_marginTop="15dp"
+        />
+
+    <EditText
+        android:id="@+id/commentInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/addComment"
+        android:inputType="text"
+        android:layout_marginTop="400dp"
+        android:layout_below="@id/Name"
+        android:layout_centerVertical="true"></EditText>
+
+    <Button
+        android:id="@+id/btnComment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Dodaj komentar"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/colorTextWhite"
+        android:layout_below="@+id/commentInput"
+        android:layout_marginTop="2dp"
+        />
+
+
+
+</RelativeLayout>

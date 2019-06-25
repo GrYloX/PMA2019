@@ -8,4 +8,5 @@
     <string name="lastname">Prezime</string>
     <string name="repeat_password">Ponovite šifru</string>
     <string name="city">Grad</string>
+    <string name="addComment">Unesi komentar</string>
 </resources>
