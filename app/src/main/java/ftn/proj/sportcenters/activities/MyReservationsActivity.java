@@ -1,11 +1,8 @@
 package ftn.proj.sportcenters.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -33,19 +30,19 @@ public class MyReservationsActivity extends AppCompatActivity {
     }
 
     private void loadItems(ArrayList<Reservation> myReservations) {
-        myReservations.add(new Reservation(
+        /*myReservations.add(new Reservation(
                 1,
-                new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(), new ArrayList<String>()),
+                userId, new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(), new ArrayList<String>()),
                 "Tennis",
                 1000.0,
                 new Date(),
                 "20:00-21:00"));
         myReservations.add(new Reservation(
                 1,
-                new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(),new ArrayList<String>()),
+                userId, new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(),new ArrayList<String>()),
                 "Basketball",
                 1500.0,
                 new Date(),
-                "19:00-21:00"));
+                "19:00-21:00"));*/
     }
 }

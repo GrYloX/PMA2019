@@ -31,7 +31,7 @@ public class MyInvitationsActivity extends AppCompatActivity {
     }
 
     private void loadItems(ArrayList<Invitation> myInvitations) {
-        myInvitations.add(new Invitation(
+       /* myInvitations.add(new Invitation(
                 1,
                 new Reservation(
                         1,
@@ -52,6 +52,6 @@ public class MyInvitationsActivity extends AppCompatActivity {
                         new Date(),
                         "20:00-21:00"),
                 new User(1, "marko"),
-                true));
+                true));*/
     }
 }

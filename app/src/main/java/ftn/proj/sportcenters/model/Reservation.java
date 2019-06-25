@@ -1,24 +1,25 @@
 package ftn.proj.sportcenters.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class Reservation implements Serializable {
 
     private int id;
-    private SportCenter sportCenter;
-    private String sport;
+    private int userId;
+    private int sportCenterId;
+    private int sportId;
     private double price;
-    private Date date;
+    private String date;
     private String period;
 
     public Reservation() {
     }
 
-    public Reservation(int id, SportCenter sportCenter, String sport, double price, Date date, String period) {
+    public Reservation(int id, int userId, int sportCenterId, int sportId, double price, String date, String period) {
         this.id = id;
-        this.sportCenter = sportCenter;
-        this.sport = sport;
+        this.userId = userId;
+        this.sportCenterId = sportCenterId;
+        this.sportId = sportId;
         this.price = price;
         this.date = date;
         this.period = period;
@@ -32,20 +33,36 @@ public class Reservation implements Serializable {
         this.id = id;
     }
 
-    public SportCenter getSportCenter() {
-        return sportCenter;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setSportCenter(SportCenter sportCenter) {
-        this.sportCenter = sportCenter;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public String getSport() {
-        return sport;
+    public int getSportCenterId() {
+        return sportCenterId;
     }
 
-    public void setSport(String sport) {
-        this.sport = sport;
+    public void setSportCenterId(int sportCenterId) {
+        this.sportCenterId = sportCenterId;
+    }
+
+    public int getSportId() {
+        return sportId;
+    }
+
+    public void setSportId(int sportId) {
+        this.sportId = sportId;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public double getPrice() {
@@ -62,13 +79,5 @@ public class Reservation implements Serializable {
 
     public void setPeriod(String period) {
         this.period = period;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }

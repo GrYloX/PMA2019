@@ -10,6 +10,8 @@ public class SportCenterSQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_USER = "user";
     public static final String TABLE_SPORT = "sport";
     public static final String TABLE_COMMENT = "comment";
+    public static final String TABLE_INVITATION = "invitation";
+    public static final String TABLE_RESERVATION = "reservation";
 
 
     public static final String COLUMN_ID = "_id";
@@ -31,6 +33,16 @@ public class SportCenterSQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_SPORT_CENTER_ID = "sport_center_id";
     public static final String COLUMN_TEXT = "text";
     public static final String COLUMN_COMMENT_DATE = "comment_date";
+
+    public static final String COLUMN_RESERVATION_ID = "reservation_id";
+    public static final String COLUMN_ACCEPTED = "accepted";
+
+    public static final String COLUMN_SPORT_ID = "sport_id";
+    public static final String COLUMN_PRICE = "price";
+    public static final String COLUMN_DATE = "date";
+    public static final String COLUMN_PERIOD = "period";
+
+
 
 
 
@@ -70,6 +82,24 @@ public class SportCenterSQLiteHelper extends SQLiteOpenHelper {
             + COLUMN_TEXT + " text, "
             + COLUMN_COMMENT_DATE + " text "
             + ")";
+    private static final String DB_CREATE_INVITATION = "create table "
+            + TABLE_INVITATION + "("
+            + COLUMN_ID  + " integer primary key autoincrement , "
+            + COLUMN_USER_ID + " integer, "
+            + COLUMN_RESERVATION_ID + " integer, "
+            + COLUMN_ACCEPTED + " integer "
+            + ")";
+
+    private static final String DB_CREATE_RESERVATION = "create table "
+            + TABLE_RESERVATION + "("
+            + COLUMN_ID  + " integer primary key autoincrement , "
+            + COLUMN_USER_ID + " integer, "
+            + COLUMN_SPORT_CENTER_ID + " integer, "
+            + COLUMN_SPORT_ID + " integer, "
+            + COLUMN_PRICE + " real, "
+            + COLUMN_DATE + " text, "
+            + COLUMN_PERIOD + " text "
+            + ")";
 
     public SportCenterSQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -81,6 +111,8 @@ public class SportCenterSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(DB_CREATE_USER);
         db.execSQL(DB_CREATE_SPORT);
         db.execSQL(DB_CREATE_COMMENT);
+        db.execSQL(DB_CREATE_INVITATION);
+        db.execSQL(DB_CREATE_RESERVATION);
     }
 
     @Override
@@ -89,6 +121,8 @@ public class SportCenterSQLiteHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SPORT);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMMENT);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INVITATION);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESERVATION);
         onCreate(db);
     }
 }

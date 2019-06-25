@@ -6,16 +6,16 @@ public class Invitation {
 
     }
 
-    public Invitation(int id, Reservation reservation, User user, boolean accepted) {
+    public Invitation(int id, int reservationId, int userId, boolean accepted) {
         this.id = id;
-        this.reservation = reservation;
-        this.user = user;
+        this.reservationId = reservationId;
+        this.userId = userId;
         this.accepted = accepted;
     }
 
     private int id;
-    private Reservation reservation;
-    private User user;
+    private int reservationId;
+    private int userId;
     private boolean accepted;
 
     public int getId() {
@@ -26,20 +26,20 @@ public class Invitation {
         this.id = id;
     }
 
-    public Reservation getReservation() {
-        return reservation;
+    public int getReservationId() {
+        return reservationId;
     }
 
-    public void setReservation(Reservation reservation) {
-        this.reservation = reservation;
+    public void setReservationId(int reservationId) {
+        this.reservationId = reservationId;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public boolean isAccepted() {

@@ -28,6 +28,10 @@ public class DBContentProvider extends ContentProvider {
     private static final int SPORT_ID = 60;
     private static final int COMMENT = 70;
     private static final int COMMENT_ID = 80;
+    private static final int INVITATION = 90;
+    private static final int INVITATION_ID = 100;
+    private static final int RESERVATION = 110;
+    private static final int RESERVATION_ID = 120;
 
     private static final String AUTHORITY = "ftn.proj.sportcenters";
 
@@ -35,11 +39,15 @@ public class DBContentProvider extends ContentProvider {
     private static final String USER_PATH = "user";
     private static final String SPORT_PATH = "sport";
     private static final String COMMENT_PATH = "comment";
+    private static final String INVITATION_PATH = "invitation";
+    private static final String RESERVATION_PATH = "reservation";
 
     public static final Uri CONTENT_URI_SPORT_CENTER = Uri.parse("content://" + AUTHORITY + "/" + SPORT_CENTER_PATH);
     public static final Uri CONTENT_URI_USER = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
     public static final Uri CONTENT_URI_SPORT = Uri.parse("content://" + AUTHORITY + "/" + SPORT_PATH);
     public static final Uri CONTENT_URI_COMMENT = Uri.parse("content://" + AUTHORITY + "/" + COMMENT_PATH);
+    public static final Uri CONTENT_URI_INVITATION = Uri.parse("content://" + AUTHORITY + "/" + INVITATION_PATH);
+    public static final Uri CONTENT_URI_RESERVATION = Uri.parse("content://" + AUTHORITY + "/" + RESERVATION_PATH);
 
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -52,6 +60,10 @@ public class DBContentProvider extends ContentProvider {
         sURIMatcher.addURI(AUTHORITY, SPORT_PATH + "/#", SPORT_ID);
         sURIMatcher.addURI(AUTHORITY, COMMENT_PATH, COMMENT);
         sURIMatcher.addURI(AUTHORITY, COMMENT_PATH + "/#", COMMENT_ID);
+        sURIMatcher.addURI(AUTHORITY, INVITATION_PATH, INVITATION);
+        sURIMatcher.addURI(AUTHORITY, INVITATION_PATH + "/#", INVITATION_ID);
+        sURIMatcher.addURI(AUTHORITY, RESERVATION_PATH, RESERVATION);
+        sURIMatcher.addURI(AUTHORITY, RESERVATION_PATH + "/#", RESERVATION_ID);
     }
 
 
@@ -107,6 +119,24 @@ public class DBContentProvider extends ContentProvider {
                 // Set the table
                 queryBuilder.setTables(SportCenterSQLiteHelper.TABLE_COMMENT);
                 break;
+            case INVITATION_ID:
+                // Adding the ID to the original query
+                queryBuilder.appendWhere(SportCenterSQLiteHelper.COLUMN_ID + "="
+                        + uri.getLastPathSegment());
+                //$FALL-THROUGH$
+            case INVITATION:
+                // Set the table
+                queryBuilder.setTables(SportCenterSQLiteHelper.TABLE_INVITATION);
+                break;
+            case RESERVATION_ID:
+                // Adding the ID to the original query
+                queryBuilder.appendWhere(SportCenterSQLiteHelper.COLUMN_ID + "="
+                        + uri.getLastPathSegment());
+                //$FALL-THROUGH$
+            case RESERVATION:
+                // Set the table
+                queryBuilder.setTables(SportCenterSQLiteHelper.TABLE_RESERVATION);
+                break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
@@ -149,6 +179,14 @@ public class DBContentProvider extends ContentProvider {
             case COMMENT:
                 id = sqlDB.insert(SportCenterSQLiteHelper.TABLE_COMMENT, null, values);
                 retVal = Uri.parse(COMMENT_PATH + "/" + id);
+                break;
+            case INVITATION:
+                id = sqlDB.insert(SportCenterSQLiteHelper.TABLE_INVITATION, null, values);
+                retVal = Uri.parse(INVITATION_PATH + "/" + id);
+                break;
+            case RESERVATION:
+                id = sqlDB.insert(SportCenterSQLiteHelper.TABLE_RESERVATION, null, values);
+                retVal = Uri.parse(INVITATION_PATH + "/" + id);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -235,6 +273,44 @@ public class DBContentProvider extends ContentProvider {
                 } else {
                     rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_COMMENT,
                             SportCenterSQLiteHelper.COLUMN_ID + "=" + idComment
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case INVITATION:
+                rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_INVITATION,
+                        selection,
+                        selectionArgs);
+                break;
+            case INVITATION_ID:
+                String idInvitation = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_INVITATION,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idInvitation,
+                            null);
+                } else {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_INVITATION,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idInvitation
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case RESERVATION:
+                rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_RESERVATION,
+                        selection,
+                        selectionArgs);
+                break;
+            case RESERVATION_ID:
+                String idReservation = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_RESERVATION,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idReservation,
+                            null);
+                } else {
+                    rowsDeleted = sqlDB.delete(SportCenterSQLiteHelper.TABLE_RESERVATION,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idReservation
                                     + " and "
                                     + selection,
                             selectionArgs);
@@ -337,6 +413,50 @@ public class DBContentProvider extends ContentProvider {
                     rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_COMMENT,
                             values,
                             SportCenterSQLiteHelper.COLUMN_ID + "=" + idComment
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case INVITATION:
+                rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_INVITATION,
+                        values,
+                        selection,
+                        selectionArgs);
+                break;
+            case INVITATION_ID:
+                String idInvitation = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_INVITATION,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idInvitation,
+                            null);
+                } else {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_INVITATION,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idInvitation
+                                    + " and "
+                                    + selection,
+                            selectionArgs);
+                }
+                break;
+            case RESERVATION:
+                rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_RESERVATION,
+                        values,
+                        selection,
+                        selectionArgs);
+                break;
+            case RESERVATION_ID:
+                String idReservation = uri.getLastPathSegment();
+                if (TextUtils.isEmpty(selection)) {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_RESERVATION,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idReservation,
+                            null);
+                } else {
+                    rowsUpdated = sqlDB.update(SportCenterSQLiteHelper.TABLE_RESERVATION,
+                            values,
+                            SportCenterSQLiteHelper.COLUMN_ID + "=" + idReservation
                                     + " and "
                                     + selection,
                             selectionArgs);
