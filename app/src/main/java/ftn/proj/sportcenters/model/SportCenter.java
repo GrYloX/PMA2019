@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SportCenter implements Serializable {
 
-    private int id;
+    private long id;
     private String name;
     private String address;
     private int image;
@@ -16,7 +16,7 @@ public class SportCenter implements Serializable {
     private List<String> sports;
 //    private static Creator CREATOR;
 
-    public SportCenter(int id, String name, String address, int image, List<String> workingHours, List<String> sports) {
+    public SportCenter(long id, String name, String address, int image, List<String> workingHours, List<String> sports) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -36,11 +36,11 @@ public class SportCenter implements Serializable {
         image = in.readInt();
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

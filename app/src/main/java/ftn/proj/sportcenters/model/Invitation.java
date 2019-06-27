@@ -6,39 +6,39 @@ public class Invitation {
 
     }
 
-    public Invitation(int id, int reservationId, int userId, boolean accepted) {
+    public Invitation(long id, long reservationId, long userId, boolean accepted) {
         this.id = id;
         this.reservationId = reservationId;
         this.userId = userId;
         this.accepted = accepted;
     }
 
-    private int id;
-    private int reservationId;
-    private int userId;
+    private long id;
+    private long reservationId;
+    private long userId;
     private boolean accepted;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getReservationId() {
+    public long getReservationId() {
         return reservationId;
     }
 
-    public void setReservationId(int reservationId) {
+    public void setReservationId(long reservationId) {
         this.reservationId = reservationId;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

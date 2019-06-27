@@ -4,10 +4,10 @@ import java.io.Serializable;
 
 public class Reservation implements Serializable {
 
-    private int id;
-    private int userId;
-    private int sportCenterId;
-    private int sportId;
+    private long id;
+    private long userId;
+    private long sportCenterId;
+    private long sportId;
     private double price;
     private String date;
     private String period;
@@ -15,7 +15,7 @@ public class Reservation implements Serializable {
     public Reservation() {
     }
 
-    public Reservation(int id, int userId, int sportCenterId, int sportId, double price, String date, String period) {
+    public Reservation(long id, long userId, long sportCenterId, long sportId, double price, String date, String period) {
         this.id = id;
         this.userId = userId;
         this.sportCenterId = sportCenterId;
@@ -25,7 +25,7 @@ public class Reservation implements Serializable {
         this.period = period;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -33,27 +33,27 @@ public class Reservation implements Serializable {
         this.id = id;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
-    public int getSportCenterId() {
+    public long getSportCenterId() {
         return sportCenterId;
     }
 
-    public void setSportCenterId(int sportCenterId) {
+    public void setSportCenterId(long sportCenterId) {
         this.sportCenterId = sportCenterId;
     }
 
-    public int getSportId() {
+    public long getSportId() {
         return sportId;
     }
 
-    public void setSportId(int sportId) {
+    public void setSportId(long sportId) {
         this.sportId = sportId;
     }
 

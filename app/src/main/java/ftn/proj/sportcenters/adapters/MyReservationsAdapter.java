@@ -2,6 +2,8 @@ package ftn.proj.sportcenters.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import java.util.ArrayList;
 
 import ftn.proj.sportcenters.R;
 import ftn.proj.sportcenters.activities.CallFriendActivity;
+import ftn.proj.sportcenters.database.DBContentProvider;
+import ftn.proj.sportcenters.database.SportCenterSQLiteHelper;
 import ftn.proj.sportcenters.model.Reservation;
 
 public class MyReservationsAdapter extends BaseAdapter {
@@ -58,7 +62,15 @@ public class MyReservationsAdapter extends BaseAdapter {
         TextView periodView = (TextView) view.findViewById(R.id.Period);
         final TextView idView = (TextView) view.findViewById(R.id.MyReservationId);
 
-        nameView.setText( mReservations.get(position).getSportCenter().getName() );
+        String[] column = {
+                SportCenterSQLiteHelper.COLUMN_NAME};
+        Cursor cursor = mContext.getContentResolver().query(
+                Uri.parse(DBContentProvider.CONTENT_URI_SPORT_CENTER + "/" +
+                        mReservations.get(position).getSportCenterId()),column,null,null,
+                null);
+
+        cursor.moveToFirst();
+        nameView.setText( cursor.getString(0) );
         priceView.setText( String.valueOf(mReservations.get(position).getPrice()) );
         dateView.setText( mReservations.get(position).getDate().toString() );
         periodView.setText( mReservations.get(position).getPeriod() );

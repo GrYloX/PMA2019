@@ -83,7 +83,7 @@ public class SportCenterActivity extends AppCompatActivity {
         cursor.moveToFirst();
 
         SportCenter sc = new SportCenter();
-        sc.setId(cursor.getInt(0));
+        sc.setId(cursor.getLong(0));
         sc.setName(cursor.getString(1));
         sc.setAddress(cursor.getString(2));
         sc.setImage(cursor.getInt(3));

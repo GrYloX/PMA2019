@@ -2,7 +2,7 @@ package ftn.proj.sportcenters.model;
 
 public class User {
 
-    private int id;
+    private long id;
     private String username;
     private String firstname;
     private String lastname;
@@ -18,12 +18,12 @@ public class User {
 
     }
 
-    public User(int id, String username){
+    public User(long id, String username){
         this.id = id;
         this.username = username;
     }
 
-    public User(int id, String username, String firstname, String lastname,
+    public User(long id, String username, String firstname, String lastname,
                 String password, String email, String city, int points, String sports) {
         this.id = id;
         this.username = username;
@@ -36,11 +36,11 @@ public class User {
         this.sports = sports;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -46,6 +46,7 @@
             -->
         </activity>
 
+
         <provider
             android:name="ftn.proj.sportcenters.database.DBContentProvider"
             android:authorities="ftn.proj.sportcenters" >

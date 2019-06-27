@@ -42,6 +42,7 @@ public class DBContentProvider extends ContentProvider {
     private static final String INVITATION_PATH = "invitation";
     private static final String RESERVATION_PATH = "reservation";
 
+    public static final Uri CONTENT_URI_BASE = Uri.parse("content://" + AUTHORITY + "/");
     public static final Uri CONTENT_URI_SPORT_CENTER = Uri.parse("content://" + AUTHORITY + "/" + SPORT_CENTER_PATH);
     public static final Uri CONTENT_URI_USER = Uri.parse("content://" + AUTHORITY + "/" + USER_PATH);
     public static final Uri CONTENT_URI_SPORT = Uri.parse("content://" + AUTHORITY + "/" + SPORT_PATH);
@@ -186,7 +187,7 @@ public class DBContentProvider extends ContentProvider {
                 break;
             case RESERVATION:
                 id = sqlDB.insert(SportCenterSQLiteHelper.TABLE_RESERVATION, null, values);
-                retVal = Uri.parse(INVITATION_PATH + "/" + id);
+                retVal = Uri.parse(RESERVATION_PATH + "/" + id);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);

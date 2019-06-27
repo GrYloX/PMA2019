@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class Comment {
 
-    private int id;
-    private int userId;
-    private int sportCenterId;
+    private long id;
+    private long userId;
+    private long sportCenterId;
     private Date commentDate;
     private String text;
 
@@ -14,7 +14,7 @@ public class Comment {
 
     }
 
-    public Comment(int id, int userId, int sportCenterId, Date commentDate, String text) {
+    public Comment(long id, long userId, long sportCenterId, Date commentDate, String text) {
         this.id = id;
         this.userId = userId;
         this.sportCenterId = sportCenterId;
@@ -22,27 +22,27 @@ public class Comment {
         this.text = text;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
-    public int getSportCenterId() {
+    public long getSportCenterId() {
         return sportCenterId;
     }
 
-    public void setSportCenterId(int sportCenterId) {
+    public void setSportCenterId(long sportCenterId) {
         this.sportCenterId = sportCenterId;
     }
 
