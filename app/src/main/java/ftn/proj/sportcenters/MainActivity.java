@@ -59,26 +59,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mListView=findViewById(R.id.SportCenterList);
-        loadItems(mSportCenters);
-
-        MainActivityAdapter adapter = new MainActivityAdapter(this,mSportCenters);
-        mListView.setAdapter(adapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-             @Override
-             public void onItemClick(AdapterView<?> parent, View view,
-                                     int position, long id) {
-                 Uri todoUri = Uri.parse(DBContentProvider.CONTENT_URI_SPORT_CENTER + "/" + id);
-                 Intent intent = new Intent(MainActivity.this, SportCenterActivity.class);
-                 intent.putExtra("sportCenter", todoUri);
-                 startActivity(intent);
-                 finish();
-                 }
-             }
-        );
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if(extras != null){
+            if(getIntent().getExtras().containsKey("sportName")){
+                loadItemsBySport(getIntent().getExtras().getString("sportName"));
+            }
+            else{
+                loadItems(mSportCenters);
+                setNewMainActivityAdapter();
+            }
+        }
+        else{
+            loadItems(mSportCenters);
+            setNewMainActivityAdapter();
+        }
 
 
         prepareMenu(mNavItems);
-
         mTitle = mDrawerTitle = getTitle();
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         mDrawerList = (ListView) findViewById(R.id.navList);
@@ -91,6 +89,23 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerList.setAdapter(navDrawerAdapter);
+    }
+
+    private void setNewMainActivityAdapter() {
+        MainActivityAdapter adapter = new MainActivityAdapter(this,mSportCenters);
+        mListView.setAdapter(adapter);
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                             @Override
+                                             public void onItemClick(AdapterView<?> parent, View view,
+                                                                     int position, long id) {
+                                                 Uri todoUri = Uri.parse(DBContentProvider.CONTENT_URI_SPORT_CENTER + "/" + id);
+                                                 Intent intent = new Intent(MainActivity.this, SportCenterActivity.class);
+                                                 intent.putExtra("sportCenter", todoUri);
+                                                 startActivity(intent);
+                                                 finish();
+                                             }
+                                         }
+        );
     }
 
     private void loadItems(ArrayList<SportCenter> mSportCenters) {
@@ -139,15 +154,30 @@ public class MainActivity extends AppCompatActivity {
     private void selectItemFromDrawer(int position) {
         if(position == 0){
             //..
-        }else if(position == 1){
-            //..
-        }else if(position == 2){
-            //..
+        }else if(position > 0 && position < mNavItems.size()){
+            loadItemsBySport(mNavItems.get(position));
         }else{
             Log.e("DRAWER", "Nesto van opsega!");
         }
 
         mDrawerList.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(mDrawerPane);
+    }
+
+    private void loadItemsBySport(String sportName) {
+        mSportCenters= new ArrayList<SportCenter>();
+        String[] columns1 = {SportCenterSQLiteHelper.COLUMN_ID};
+        Cursor cursor1 = getContentResolver().query(DBContentProvider.CONTENT_URI_SPORT,
+                columns1, SportCenterSQLiteHelper.COLUMN_NAME + " like ?", new String[] {sportName+"%"},null);
+        cursor1.moveToFirst();
+        String[] columns2 = {SportCenterSQLiteHelper.COLUMN_ID, SportCenterSQLiteHelper.COLUMN_NAME,
+                SportCenterSQLiteHelper.COLUMN_ADDRESS, SportCenterSQLiteHelper.COLUMN_IMAGE};
+        Cursor cursor2 = getContentResolver().query(DBContentProvider.CONTENT_URI_SPORT_CENTER,
+                columns2, SportCenterSQLiteHelper.COLUMN_SPORTS + " like ?", new String[] {"%"+cursor1.getInt(0)+"%"},null);
+
+        while (cursor2.moveToNext()) {
+            createSportCenter(cursor2);
+        }
+        setNewMainActivityAdapter();
     }
 }

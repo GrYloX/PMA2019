@@ -4,10 +4,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -16,13 +23,24 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import ftn.proj.sportcenters.MainActivity;
 import ftn.proj.sportcenters.R;
+import ftn.proj.sportcenters.adapters.DrawerListAdapter;
+import ftn.proj.sportcenters.database.DBContentProvider;
 import ftn.proj.sportcenters.database.SportCenterSQLiteHelper;
 import ftn.proj.sportcenters.model.SportCenter;
 
 public class SportCenterActivity extends AppCompatActivity {
 
     private SportCenter sportCenter = new SportCenter();
+    private ArrayList<String> mNavItems = new ArrayList<String>();
+    private CharSequence mDrawerTitle;
+    private CharSequence mTitle;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private RelativeLayout mDrawerPane;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +87,20 @@ public class SportCenterActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        prepareMenu(mNavItems);
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerList = (ListView) findViewById(R.id.navList);
+
+        // Populate the Navigtion Drawer with options
+        mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
+        DrawerListAdapter navDrawerAdapter = new DrawerListAdapter(this, mNavItems);
+
+        // set a custom shadow that overlays the main content when the drawer opens
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        mDrawerList.setAdapter(navDrawerAdapter);
     }
 
     private SportCenter loadSportCenter(Uri todoUri) {
@@ -106,5 +138,39 @@ public class SportCenterActivity extends AppCompatActivity {
         return sc;
     }
 
+    private void prepareMenu(ArrayList<String> mNavItems ){
+        mNavItems.add("Moj profil");
+        String[] column = {
+                SportCenterSQLiteHelper.COLUMN_NAME};
+        Cursor cursor = getContentResolver().query(
+                DBContentProvider.CONTENT_URI_SPORT,column,null,null,
+                null);
+        while (cursor.moveToNext()) {
+            mNavItems.add(cursor.getString(0));
+        }
+    }
+
+    /* The click listner for ListView in the navigation drawer */
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItemFromDrawer(position);
+        }
+    }
+    private void selectItemFromDrawer(int position) {
+        if(position == 0){
+            //..
+        }else if(position > 0 && position < mNavItems.size()){
+            Intent intent = new Intent(SportCenterActivity.this, MainActivity.class);
+            intent.putExtra("sportName", mNavItems.get(position));
+            startActivity(intent);
+            finish();
+        }else{
+            Log.e("DRAWER", "Nesto van opsega!");
+        }
+
+        mDrawerList.setItemChecked(position, true);
+        mDrawerLayout.closeDrawer(mDrawerPane);
+    }
 
 }

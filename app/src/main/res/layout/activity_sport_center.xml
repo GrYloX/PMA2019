@@ -6,97 +6,171 @@
     android:layout_height="match_parent"
     tools:context=".activities.SportCenterActivity">
 
-    <ImageView
-        android:id="@+id/Image"
+
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/Name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:gravity="center_vertical"
-        android:textColor="#000"
-        android:text="Line 1"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/Image" />
+        <!--  The main content view -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/Address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:gravity="center_vertical"
-        android:textColor="#000"
-        android:text="Line 1"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/Name" />
+            <ImageView
+                android:id="@+id/Image"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                />
 
-    <TextView
-        android:id="@+id/WorkingHours"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:gravity="center_vertical"
-        android:textColor="#000"
-        android:text="Line 1"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@+id/Address" />
+            <TextView
+                android:id="@+id/Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="#000"
+                android:text="Line 1"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/Image" />
 
-    <RatingBar
-        android:id="@+id/Rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="10sp"
-        android:scaleX="0.85"
-        android:scaleY="0.85"
-        android:gravity="center_vertical"
-        android:textColor="#000"
-        android:text="Line 1"
-        android:textStyle="bold"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@+id/Name"
-        android:layout_below="@+id/Image"/>
+            <TextView
+                android:id="@+id/Address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="#000"
+                android:text="Line 1"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/Name" />
 
-    <Button
-        android:id="@+id/Favourite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Favourite"
-        android:background="@color/colorYellow"
-        android:textColor="@color/colorTextBlack"
-        android:layout_toRightOf="@+id/WorkingHours"
-        android:layout_below="@+id/Rating"
-        android:layout_marginLeft="60dp"/>
+            <TextView
+                android:id="@+id/WorkingHours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:gravity="center_vertical"
+                android:textColor="#000"
+                android:text="Line 1"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/Address" />
 
-    <Button
-        android:id="@+id/Comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Comment"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorTextWhite"
-        android:layout_toRightOf="@+id/WorkingHours"
-        android:layout_below="@+id/Favourite"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="10dp"/>
+            <RatingBar
+                android:id="@+id/Rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="10sp"
+                android:scaleX="0.85"
+                android:scaleY="0.85"
+                android:gravity="center_vertical"
+                android:textColor="#000"
+                android:text="Line 1"
+                android:textStyle="bold"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/Name"
+                android:layout_below="@+id/Image"/>
 
-    <Button
-        android:id="@+id/Reserve"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reserve"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorTextWhite"
-        android:layout_marginTop="460dp" />
+            <Button
+                android:id="@+id/Favourite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favourite"
+                android:background="@color/colorYellow"
+                android:textColor="@color/colorTextBlack"
+                android:layout_toRightOf="@+id/WorkingHours"
+                android:layout_below="@+id/Rating"
+                android:layout_marginLeft="60dp"/>
+
+            <Button
+                android:id="@+id/Comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comment"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorTextWhite"
+                android:layout_toRightOf="@+id/WorkingHours"
+                android:layout_below="@+id/Favourite"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="10dp"/>
+
+            <Button
+                android:id="@+id/Reserve"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reserve"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/colorTextWhite"
+                android:layout_marginTop="460dp" />
+
+        </RelativeLayout>
+
+
+
+
+        <!-- The navigation drawer -->
+        <RelativeLayout
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:id="@+id/drawerPane"
+            android:layout_gravity="start">
+
+            <!-- Profile Box -->
+
+            <RelativeLayout
+                android:id="@+id/profileBox"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="8dp" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/sportski"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/drawer_title1"
+                        android:textColor="#fff"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/centri"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/drawer_title2"
+                        android:textColor="#fff"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!-- List of Actions (pages) -->
+            <ListView
+                android:id="@+id/navList"
+                android:layout_width="280dp"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/profileBox"
+                android:choiceMode="singleChoice"
+                android:background="#ffffffff" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.DrawerLayout>
 
 </RelativeLayout>
