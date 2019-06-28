@@ -7,5 +7,6 @@
     <color name="colorTextBlack">#000000</color>
     <color name="colorBackground">#cfd8dc</color>
     <color name="colorTextGrey">#B7BDC2</color>
-    <color name="colorYellow">#FFEB3B</color>
+    <color name="colorYellow">#FFF044</color>
+    <color name="colorDarkYellow">#e0d33c</color>
 </resources>

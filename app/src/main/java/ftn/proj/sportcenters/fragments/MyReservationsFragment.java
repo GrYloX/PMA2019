@@ -1,31 +1,39 @@
-package ftn.proj.sportcenters.activities;
+package ftn.proj.sportcenters.fragments;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import ftn.proj.sportcenters.R;
 import ftn.proj.sportcenters.adapters.MyReservationsAdapter;
 import ftn.proj.sportcenters.model.Reservation;
-import ftn.proj.sportcenters.model.SportCenter;
 
-public class MyReservationsActivity extends AppCompatActivity {
+public class MyReservationsFragment extends Fragment {
 
     private ArrayList<Reservation> myReservations = new ArrayList<Reservation>();
     private ListView mListView;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_reservations);
-        mListView=findViewById(R.id.MyReservationsList);
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.my_reservations_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        mListView=view.findViewById(R.id.MyReservationsList);
         loadItems(myReservations);
 
-        MyReservationsAdapter adapter = new MyReservationsAdapter(this, myReservations);
+        MyReservationsAdapter adapter = new MyReservationsAdapter(this.getContext(), myReservations);
         mListView.setAdapter(adapter);
     }
 
@@ -45,4 +53,5 @@ public class MyReservationsActivity extends AppCompatActivity {
                 new Date(),
                 "19:00-21:00"));*/
     }
+
 }

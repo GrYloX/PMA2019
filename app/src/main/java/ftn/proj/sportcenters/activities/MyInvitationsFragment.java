@@ -1,32 +1,37 @@
 package ftn.proj.sportcenters.activities;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import ftn.proj.sportcenters.R;
 import ftn.proj.sportcenters.adapters.MyInvitationsAdapter;
 import ftn.proj.sportcenters.model.Invitation;
-import ftn.proj.sportcenters.model.Reservation;
-import ftn.proj.sportcenters.model.SportCenter;
-import ftn.proj.sportcenters.model.User;
 
-public class MyInvitationsActivity extends AppCompatActivity {
+public class MyInvitationsFragment extends Fragment {
     private ArrayList<Invitation> myInvitations = new ArrayList<Invitation>();
     private ListView mListView;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_invitations);
-        mListView=findViewById(R.id.MyInvitationsList);
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.my_invitations_fragment, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Bundle args = getArguments();
+        mListView=view.findViewById(R.id.MyInvitationsList);
         loadItems(myInvitations);
 
-        MyInvitationsAdapter adapter = new MyInvitationsAdapter(this, myInvitations);
+        MyInvitationsAdapter adapter = new MyInvitationsAdapter(this.getContext(), myInvitations);
         mListView.setAdapter(adapter);
     }
 

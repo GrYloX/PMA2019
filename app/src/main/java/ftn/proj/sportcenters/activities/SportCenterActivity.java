@@ -159,7 +159,9 @@ public class SportCenterActivity extends AppCompatActivity {
     }
     private void selectItemFromDrawer(int position) {
         if(position == 0){
-            //..
+            Intent intent = new Intent(SportCenterActivity.this, MyProfileActivity.class);
+            startActivity(intent);
+            finish();
         }else if(position > 0 && position < mNavItems.size()){
             Intent intent = new Intent(SportCenterActivity.this, MainActivity.class);
             intent.putExtra("sportName", mNavItems.get(position));

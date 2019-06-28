@@ -9,21 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.RegisterActivity"></activity>
-        <activity android:name=".activities.SportCenterActivity">
-        </activity>
-        <activity android:name=".activities.CommentActivity">
-        </activity>
-        <activity android:name=".activities.ReservationActivity">
-        </activity>
-        <activity android:name=".activities.CallFriendActivity">
-        </activity>
-        <activity android:name=".activities.MyInvitationsActivity">
-        </activity>
-
-        <activity android:name=".activities.MyReservationsActivity">
-        </activity>
-
+        <activity android:name=".activities.MyProfileActivity"></activity>
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.SportCenterActivity"></activity>
+        <activity android:name=".activities.CommentActivity"></activity>
+        <activity android:name=".activities.ReservationActivity"></activity>
+        <activity android:name=".activities.CallFriendActivity"></activity>
         <activity
             android:name=".activities.LoginActivity"
             android:label="@string/app_name">
@@ -46,12 +37,9 @@
             -->
         </activity>
 
-
         <provider
-            android:name="ftn.proj.sportcenters.database.DBContentProvider"
-            android:authorities="ftn.proj.sportcenters" >
-        </provider>
-
+            android:name=".database.DBContentProvider"
+            android:authorities="ftn.proj.sportcenters"></provider>
     </application>
 
 </manifest>

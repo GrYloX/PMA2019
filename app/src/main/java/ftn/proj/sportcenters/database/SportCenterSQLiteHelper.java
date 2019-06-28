@@ -47,7 +47,7 @@ public class SportCenterSQLiteHelper extends SQLiteOpenHelper {
 
 
     private static final String DATABASE_NAME = "sportcenters.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     private static final String DB_CREATE_SPORT_CENTER = "create table "
             + TABLE_SPORT_CENTER + "("
