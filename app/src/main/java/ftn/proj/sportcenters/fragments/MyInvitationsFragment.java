@@ -1,4 +1,4 @@
-package ftn.proj.sportcenters.activities;
+package ftn.proj.sportcenters.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

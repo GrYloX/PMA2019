@@ -1,9 +1,12 @@
 package ftn.proj.sportcenters.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +17,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ftn.proj.sportcenters.R;
-import ftn.proj.sportcenters.activities.CallFriendActivity;
+import ftn.proj.sportcenters.activities.MyProfileActivity;
 import ftn.proj.sportcenters.database.DBContentProvider;
 import ftn.proj.sportcenters.database.SportCenterSQLiteHelper;
+import ftn.proj.sportcenters.fragments.CallFriendFragment;
 import ftn.proj.sportcenters.model.Reservation;
 
 public class MyReservationsAdapter extends BaseAdapter {
@@ -45,7 +49,7 @@ public class MyReservationsAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         View view;
 
         if (convertView == null) {
@@ -80,13 +84,15 @@ public class MyReservationsAdapter extends BaseAdapter {
         mPozovi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CallFriendActivity.class);
-                intent.putExtra("reservation", mReservations.get(position));
-                mContext.startActivity(intent);
-                //mContext.finish();
+                CallFriendFragment fragment = new CallFriendFragment();
+                Bundle arguments = new Bundle();
+                arguments.putSerializable("reservation",mReservations.get(position));
+                fragment.setArguments(arguments);
+                MyProfileActivity activity = (MyProfileActivity) mContext;
+                FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.MyReservationsFragmentId, fragment).commit();
             }
         });
-
         return view;
     }
 }

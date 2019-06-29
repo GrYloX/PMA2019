@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,23 +36,18 @@ public class MyReservationsFragment extends Fragment {
 
         MyReservationsAdapter adapter = new MyReservationsAdapter(this.getContext(), myReservations);
         mListView.setAdapter(adapter);
+
     }
 
     private void loadItems(ArrayList<Reservation> myReservations) {
-        /*myReservations.add(new Reservation(
-                1,
-                userId, new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(), new ArrayList<String>()),
-                "Tennis",
-                1000.0,
-                new Date(),
-                "20:00-21:00"));
         myReservations.add(new Reservation(
                 1,
-                userId, new SportCenter(1, "Albatros", "Novi Sad", R.drawable.albatros, new ArrayList<String>(),new ArrayList<String>()),
-                "Basketball",
-                1500.0,
-                new Date(),
-                "19:00-21:00"));*/
+                1, 1,
+                1,
+                1000.0,
+                "Subota bajo moj",
+                "20:00-21:00"));
+
     }
 
 }

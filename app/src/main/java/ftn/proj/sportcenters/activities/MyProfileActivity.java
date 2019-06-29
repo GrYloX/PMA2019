@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import ftn.proj.sportcenters.R;
+import ftn.proj.sportcenters.fragments.MyInvitationsFragment;
 import ftn.proj.sportcenters.fragments.MyReservationsFragment;
 
 public class MyProfileActivity extends AppCompatActivity {
